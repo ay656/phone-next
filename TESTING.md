@@ -7,14 +7,21 @@
 - Adding a contact and saving refreshes the main screen.
 - Saving with an empty contact name fails with a message.
 - Saving with an invalid non-empty phone number fails with a message.
+- A valid saved phone number no longer reports as "not set" on the main screen.
+- A malformed old phone number reports "invalid format" instead of "not set".
 - `Up` / `Down` changes contact order.
 - Leaving Settings with unsaved edits asks for confirmation.
 - Android back button on Settings uses the same unsaved-edits confirmation.
 - Empty contact list shows a setup hint.
 - Restarting the app keeps saved contacts.
+- Restarting the app keeps weather city, latitude, and longitude.
+- Weather can be saved with city only and empty latitude/longitude.
 - Avatar selection appears on the settings page and main screen.
 - Broken avatar URI falls back to the default text avatar.
 - Tapping a contact without a phone number shows a warning.
 - Tapping a contact with a phone number triggers TTS and a 1-second cancel dialog.
 - Not cancelling requests call permission or starts the call.
 - Denying call permission shows a fallback message and opens the system dialer.
+- Tapping the bottom weather button fetches and speaks today/tomorrow weather.
+- Invalid weather coordinates fail to save with a Chinese warning.
+- Network failure during weather fetch shows a Chinese warning and does not crash.
