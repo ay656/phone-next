@@ -15,7 +15,9 @@ This version uses native Android Java + Gradle. It does not use Kivy, Buildozer,
 - If `CALL_PHONE` permission is denied, the app opens the system dialer.
 - If direct-call permission is denied, the app explains the fallback before opening the dialer.
 - Tap the title to enter Settings directly.
-- Settings: add, delete, reorder, edit name, display name, phone number, and avatar.
+- Bottom button speaks today's and tomorrow's weather by TTS.
+- Settings: add, delete, reorder, edit name, display text, phone number, avatar, and weather location.
+- Weather settings can use only a city name; latitude and longitude are optional advanced fields.
 - Leaving Settings with unsaved edits shows a confirmation dialog.
 - Empty contact list shows an in-app setup hint.
 - Invalid phone numbers are blocked on save.
@@ -67,13 +69,16 @@ app/build/outputs/apk/debug/app-debug.apk
 2. Open the app.
 3. Tap the top title to enter Settings directly.
 4. Add or edit contacts.
-5. Use `Up` / `Down` to reorder contacts.
-6. Save and return to the main screen.
-7. Tap a contact card. Cancel within 1 second if needed, otherwise the phone call starts.
-8. Android back button on Settings asks before discarding unsaved edits.
+5. Set the weather city if the default location is not correct; latitude and longitude can be left empty.
+6. Use `Up` / `Down` to reorder contacts.
+7. Save and return to the main screen.
+8. Tap a contact card. Cancel within 1 second if needed, otherwise the phone call starts.
+9. Tap the bottom weather button to hear a two-day weather report.
+10. Android back button on Settings asks before discarding unsaved edits.
 
 ## Notes
 
 - Direct calling needs `CALL_PHONE`.
 - If permission is denied, Android opens the system dialer.
+- Weather needs network access and uses the Open-Meteo forecast API.
 - Avatar selection uses Android's system document picker and persists URI read permission.
