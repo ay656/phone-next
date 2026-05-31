@@ -1,0 +1,56 @@
+name: Android Debug APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.7
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4
+        with:
+          packages: "platform-tools platforms;android-35 build-tools;35.0.0"
+
+      - name: Build debug APK
+        run: gradle :app:assembleDebug --stacktrace
+
+      - name: Collect APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release
+          APK_PATH="$(find app/build/outputs/apk -type f -name '*.apk' | head -n 1)"
+          if [ -z "$APK_PATH" ]; then
+            echo "No APK found under app/build/outputs/apk"
+            find app/build -maxdepth 5 -type f | sort
+            exit 1
+          fi
+          echo "Found APK: $APK_PATH"
+          cp "$APK_PATH" release/jianhu-call-debug.apk
+          ls -lh release
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: jianhu-call-debug-apk
+          path: release/jianhu-call-debug.apk
+          if-no-files-found: error
